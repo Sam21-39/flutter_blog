@@ -11,24 +11,26 @@ class DataHandler {
 
   Future createUser() async {
     try {
-      await firestore.collection('User').doc(auth.currentUser?.uid).set({
-        'name': auth.currentUser?.displayName,
-        'email': auth.currentUser?.email,
-        'image': auth.currentUser?.photoURL,
-        'isActive': true,
-        'timestamp': Timestamp.now(),
-      });
+      await firestore.collection('User').doc(auth.currentUser?.uid).set(
+        {
+          'name': auth.currentUser?.displayName,
+          'email': auth.currentUser?.email,
+          'image': auth.currentUser?.photoURL,
+          'timestamp': Timestamp.now(),
+        },
+        SetOptions(merge: true),
+      );
     } catch (e) {
       print(e.toString());
     }
   }
 
-  Future updateUser(String city) async {
+  Future updateUserCity(String city) async {
     try {
       await firestore.collection('User').doc(auth.currentUser?.uid).set(
         {
           'city': city,
-          'isActive': true,
+          // 'isActive': true,
           'timestamp': Timestamp.now(),
         },
         SetOptions(merge: true),
