@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/Services/staicData.dart';
+import 'package:flutter_blog/Views/Dashboard/home.dart';
 import 'package:flutter_blog/Views/IntroScreens/intro.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -23,12 +26,25 @@ class _SplashState extends State<Splash> {
     Future.delayed(
       const Duration(milliseconds: 2800),
     ).then(
-      (value) => Get.off(
-        () => const Intro(),
-        popGesture: false,
-        transition: Transition.fadeIn,
-        duration: const Duration(milliseconds: 800),
-      ),
+      (value) async {
+        final sp = await SharedPreferences.getInstance();
+        if (sp.getBool(StaticData.isLogged) != null &&
+            sp.getBool(StaticData.isLogged) == true) {
+          Get.off(
+            () => const Home(),
+            popGesture: false,
+            transition: Transition.fadeIn,
+            duration: const Duration(milliseconds: 800),
+          );
+        } else {
+          Get.off(
+            () => const Intro(),
+            popGesture: false,
+            transition: Transition.fadeIn,
+            duration: const Duration(milliseconds: 800),
+          );
+        }
+      },
     );
   }
 

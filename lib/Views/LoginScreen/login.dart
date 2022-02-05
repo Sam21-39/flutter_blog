@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/Services/authHandler.dart';
 import 'package:flutter_blog/Services/dataHandler.dart';
+import 'package:flutter_blog/Services/staicData.dart';
+import 'package:flutter_blog/Views/Dashboard/home.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatelessWidget {
   Login({Key? key}) : super(key: key);
@@ -54,15 +57,31 @@ class Login extends StatelessWidget {
               ),
               padding: const EdgeInsets.all(16.0),
               onPressed: () async {
-                
-                
-
-                // Get.off(
-                //   () => const Login(),
-                //   popGesture: false,
-                //   transition: Transition.fadeIn,
-                //   duration: const Duration(milliseconds: 800),
-                // );
+                final sp = await SharedPreferences.getInstance();
+                final result = await auth.signInWithGoogle();
+                if (result.contains('error') ||
+                    result.contains('exeception') ||
+                    result.contains('PERMISSION') ||
+                    result.contains('accessToken != null') ||
+                    result.contains('idToken != null')) {
+                  Get.snackbar(
+                    'Error',
+                    'Some error occured. Try again later',
+                  );
+                } else {
+                  sp.setBool(
+                    StaticData.isLogged,
+                    true,
+                  );
+                  print(result);
+                  data.createUser();
+                  Get.off(
+                    () => const Home(),
+                    popGesture: false,
+                    transition: Transition.fadeIn,
+                    duration: const Duration(milliseconds: 800),
+                  );
+                }
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
