@@ -17,7 +17,29 @@ class Login extends StatelessWidget {
         height: size.height,
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            Column(
+              children: [
+                FlutterLogo(
+                  size: size.width * 0.48,
+                  curve: Curves.easeIn,
+                  duration: const Duration(milliseconds: 1200),
+                  textColor: Colors.teal,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Flutter Blog',
+                    style: TextStyle(
+                      fontSize: 32,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ],
+            ),
             MaterialButton(
               minWidth: size.width * 0.8,
               elevation: 8.0,
