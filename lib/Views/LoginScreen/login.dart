@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -15,7 +16,48 @@ class Login extends StatelessWidget {
         width: size.width,
         height: size.height,
         padding: const EdgeInsets.all(16.0),
-        child: Column(),
+        child: Column(
+          children: [
+            MaterialButton(
+              minWidth: size.width * 0.8,
+              elevation: 8.0,
+              color: Colors.teal.shade600,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              padding: const EdgeInsets.all(16.0),
+              onPressed: () => Get.off(
+                () => const Login(),
+                popGesture: false,
+                transition: Transition.fadeIn,
+                duration: const Duration(milliseconds: 800),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: size.width * 0.1,
+                    child: Image.asset(
+                      'assets/google-logo.png',
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      'Sign In with Google',
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
