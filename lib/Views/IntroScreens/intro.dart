@@ -125,7 +125,7 @@ class _IntroState extends State<Intro> {
                   ),
                   padding: const EdgeInsets.all(16.0),
                   onPressed: () => Get.off(
-                    () => const Login(),
+                    () => Login(),
                     popGesture: false,
                     transition: Transition.fadeIn,
                     duration: const Duration(milliseconds: 800),

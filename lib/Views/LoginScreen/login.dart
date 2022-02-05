@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/Services/authHandler.dart';
+import 'package:flutter_blog/Services/dataHandler.dart';
 import 'package:get/get.dart';
 
 class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+  Login({Key? key}) : super(key: key);
+
+  final AuthHandler auth = AuthHandler.instance;
+  final DataHandler data = DataHandler.dataInstance;
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +53,17 @@ class Login extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.0),
               ),
               padding: const EdgeInsets.all(16.0),
-              onPressed: () => Get.off(
-                () => const Login(),
-                popGesture: false,
-                transition: Transition.fadeIn,
-                duration: const Duration(milliseconds: 800),
-              ),
+              onPressed: () async {
+                
+                
+
+                // Get.off(
+                //   () => const Login(),
+                //   popGesture: false,
+                //   transition: Transition.fadeIn,
+                //   duration: const Duration(milliseconds: 800),
+                // );
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
