@@ -1,10 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/Model/weather.dart';
 import 'package:flutter_blog/Services/authHandler.dart';
 import 'package:flutter_blog/Services/staicData.dart';
 import 'package:flutter_blog/Views/LoginScreen/login.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -38,6 +41,24 @@ class Home extends StatelessWidget {
               },
               child: const Text('Sign out'),
             ),
+            ElevatedButton.icon(
+              onPressed: () async {
+                final url = Uri.parse(
+                  "https://fcc-weather-api.glitch.me/api/current?lat=22.5726&lon=88.3639",
+                  // 'http://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=json',
+                );
+                final response = await http.get(url);
+                // print(
+                // json.decode(response.body),
+                // );
+                final weather = WeatherModel.fromJson(
+                  json.decode(response.body),
+                );
+                print(weather.main?.temp);
+              },
+              icon: const Icon(Icons.link),
+              label: const Text('weather'),
+            )
           ],
         ),
       ),
