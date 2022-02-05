@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/Views/IntroScreens/splash.dart';
 import 'package:get/get.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(const MyApp());
+void main() {
+  var ensureInitialized = WidgetsFlutterBinding.ensureInitialized();
+  ensureInitialized.addPostFrameCallback((timeStamp) async {
+    await Firebase.initializeApp();
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
