@@ -21,13 +21,13 @@ class _SplashState extends State<Splash> {
       (value) => isDisplayOver.value = true,
     );
     Future.delayed(
-      const Duration(milliseconds: 2200),
+      const Duration(milliseconds: 2800),
     ).then(
       (value) => Get.off(
         () => const Intro(),
         popGesture: false,
         transition: Transition.fadeIn,
-        duration: const Duration(milliseconds: 700),
+        duration: const Duration(milliseconds: 800),
       ),
     );
   }
